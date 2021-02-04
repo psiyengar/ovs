@@ -13,4 +13,4 @@ steps:
 - script: |
     apt-get install gcc clang libcap-ng-dev libssl-dev autoconf automake libtool python-pyftpdlib wget curl netcat python-tftpy net-tools
 
-  displayName: 'build OVS'
+  displayName: 'Install pre-requisites'
