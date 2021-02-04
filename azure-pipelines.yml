@@ -10,7 +10,23 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: |
-    ls -l 
-  displayName: 'Install pre-requisites'
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your commands here
+      
+      
+      echo "Install OVS"
+      
+      # Install pre-requisites
+      
+      sudo apt-get install gcc clang libcap-ng-dev libssl-dev autoconf automake libtool python-pyftpdlib wget curl netcat \
+                           python-tftpy net-tools python-pip
+      sudo -H pip install six
+      
+      ./boot.sh
+      ./configure --with-linux=/lib/modules/$(uname -r)/build --enable-Werror --enable-coverage
+      make
+      sudo make install
 
