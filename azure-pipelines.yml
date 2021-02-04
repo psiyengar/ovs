@@ -11,11 +11,6 @@ pool:
 
 steps:
 - script: |
-    ls -l install.sh
-    chmod +x install_ovs.sh
+    ls -l 
   displayName: 'Install pre-requisites'
 
-- task: Bash@3
-  inputs:
-    filePath: './install_ovs.sh'
-    failOnStderr: true
