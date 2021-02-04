@@ -1,0 +1,31 @@
+# C/C++ with GCC
+# Build your C/C++ project with GCC using make.
+# Add steps that publish test results, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/apps/c-cpp/gcc
+
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your commands here
+      set -e
+      sudo apt-get install gcc clang libcap-ng-dev libssl-dev autoconf automake libtool python-pyftpdlib wget curl netcat \
+                           python-tftpy net-tools python-pip
+      sudo -H pip install six
+      echo "Pre-requisite INSTALL OK"
+      ./boot.sh
+      echo "BOOTSTRAP OK"
+      ./configure --with-linux=/lib/modules/$(uname -r)/build --enable-Werror --enable-coverage
+      echo "CONFIGURE OK"
+      make
+      echo "MAKE OK"
+      sudo make install
+      echo "INSTALL OK"
+
