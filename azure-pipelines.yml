@@ -15,18 +15,17 @@ steps:
     targetType: 'inline'
     script: |
       # Write your commands here
-      
-      
-      echo "Install OVS"
-      
-      # Install pre-requisites
-      
+      set -e
       sudo apt-get install gcc clang libcap-ng-dev libssl-dev autoconf automake libtool python-pyftpdlib wget curl netcat \
                            python-tftpy net-tools python-pip
       sudo -H pip install six
-      
+      echo "Pre-requisite INSTALL OK"
       ./boot.sh
+      echo "BOOTSTRAP OK"
       ./configure --with-linux=/lib/modules/$(uname -r)/build --enable-Werror --enable-coverage
+      echo "CONFIGURE OK"
       make
+      echo "MAKE OK"
       sudo make install
+      echo "INSTALL OK"
 
