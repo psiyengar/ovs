@@ -11,6 +11,10 @@ pool:
 
 steps:
 - script: |
-    sudo apt-get install gcc clang libcap-ng-dev libssl-dev autoconf automake libtool python-pyftpdlib wget curl netcat python-tftpy net-tools
-
+    chmod +x install_ovs.sh
   displayName: 'Install pre-requisites'
+
+- task: Bash@3
+  inputs:
+    filePath: './install_ovs.sh'
+    failOnStderr: true
